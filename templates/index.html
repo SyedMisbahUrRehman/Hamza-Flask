@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Table</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Add Data</h1>
+    <div class="form-container">
+        <div class="input-group">
+            <label for="bname1">Button 1:</label>
+            <input type="text" name="bname1" id="bname1" placeholder="Enter Button 1 Value">
+        </div>
+        <div class="input-group">
+            <label for="bname2">Button 2:</label>
+            <input type="text" name="bname2" id="bname2" placeholder="Enter Button 2 Value">
+        </div>
+        <div class="button-container">
+            <button type="button" id="btn" onclick="AddRow()">Add</button>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <h1>Display</h1>
+        <table id="show">
+            <thead>
+                <tr>
+                    <th>Button 1</th>
+                    <th>Button 2</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data will be inserted here dynamically -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    var list1 = [];
+    var list2 = [];
+
+    function AddRow() {
+        var bname1 = document.getElementById("bname1").value;
+        var bname2 = document.getElementById("bname2").value;
+
+        if (bname1 !== "" && bname2 !== "") {
+            var tableRef = document.getElementById('show').getElementsByTagName('tbody')[0];
+            var newRow = tableRef.insertRow();
+
+            var newCell1 = newRow.insertCell(0);
+            var newCell2 = newRow.insertCell(1);
+
+            newCell1.innerHTML = bname1;
+            newCell2.innerHTML = bname2;
+
+            list1.push(bname1);
+            list2.push(bname2);
+        } else {
+            alert("Please fill in both input fields.");
+        }
+    }
+</script>
+
+</body>
+</html>
