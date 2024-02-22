@@ -1,22 +1,20 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
-
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/pass.html', methods=['POST'])
-def pass_data():
-    if request.method == 'POST':
-        bname1 = request.form.get('bname1')
-        bname2 = request.form.get('bname2')
-        print("Button 1:", bname1)
-        print("Button 2:", bname2)
-        return render_template('pass.html', bname1=bname1, bname2=bname2)
-    else:
-        return "Method Not Allowed", 405
+@app.route('/values', methods=['POST'])
+def values():
+    val1 = request.form['val1']
+    val2 = request.form['val2']
+    return redirect(url_for('display_values', val1=val1, val2=val2))
+
+@app.route('/display_values/<val1>/<val2>')
+def display_values(val1, val2):
+    return render_template('pass.html', val1=val1, val2=val2)
 
 if __name__ == '__main__':
     app.run(debug=True)
